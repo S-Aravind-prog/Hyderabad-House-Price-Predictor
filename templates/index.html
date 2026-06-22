@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyderabad House Price Predictor</title>
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="header">
+            <h1>🏠 Hyderabad House Price Predictor</h1>
+            <p>
+                Estimate the market value of your property instantly
+            </p>
+        </div>
+
+        <form action="/predict" method="POST">
+
+            <div class="form-group">
+                <label>📍 Location</label>
+
+                <select name="location" required>
+                    <option value="" selected disabled>
+                        Select Location
+                    </option>
+                    <option value="Kondapur">Kondapur</option>
+                    <option value="Gachibowli">Gachibowli</option>
+                    <option value="Miyapur">Miyapur</option>
+                    <option value="Manikonda">Manikonda</option>
+                    <option value="Narsingi">Narsingi</option>
+                    <option value="Kukatpally">Kukatpally</option>
+                    <option value="Tellapur">Tellapur</option>
+                    <option value="Kompally">Kompally</option>
+                    <option value="Patancheru">Patancheru</option>
+                    <option value="Ameenpur">Ameenpur</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>🏡 Property Type</label>
+
+                <select name="PropertyType" required>
+                    <option value="" selected disabled>
+                        Select PropertyType
+                    </option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Independent House">Independent House</option>
+                    <option value="Independent Floor">Independent Floor</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>🏗 Building Status</label>
+
+                <select name="building_status" required>
+                    <option value="" selected disabled>
+                        Select Building Status
+                    </option>
+                    <option value="New">New</option>
+                    <option value="Ready to move">Ready to Move</option>
+                    <option value="Under Construction">Under Construction</option>
+                    <option value="Resale">Resale</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>🛏 BHK</label>
+
+                <select name="BHK">
+                    <option value="" selected disabled>
+                        Select BHK
+                    </option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>📐 Area (sq ft)</label>
+
+                <input type="number"
+                       name="area_insqft"
+                       placeholder="Enter Area"
+                       required>
+            </div>
+
+            
+            <button type="submit">
+                Predict Property Price
+            </button>
+
+        </form>
+
+        {% if prediction %}
+
+        <div class="result-box">
+
+            <h2>Estimated Property Value</h2>
+
+            <h1>{{ prediction }}</h1>
+
+            <div class="price-range">
+                Expected Range:
+                <strong>{{lower_price}}</strong>
+                -
+                <strong>{{upper_price}}</strong>
+            </div>
+
+            <div class="category">
+                {{ category }}
+            </div>
+            
+            <hr>
+
+            <h3>📋 Property Summary</h3>
+
+            <p><strong>Location:</strong> {{ location }}</p>
+            <p><strong>Property Type:</strong> {{ propertytype }}</p>
+            <p><strong>Status:</strong> {{ status }}</p>
+            <p><strong>BHK:</strong> {{ bhk }}</p>
+            <p><strong>Area:</strong> {{ area }} sq ft</p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
